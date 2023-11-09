@@ -11,31 +11,38 @@ The scope of SalesStat Pro encompasses a wide range of functionalities and featu
   - Creation and management of user accounts.
   - User authentication for secure access.
   - Different levels of access control for administrators and users.
+    
 2.) Sales Analysis:
   - In-depth analysis of sales data.
   - Review of sales trends and patterns.
   - Historical sales data for comparisons.
   - Insights and reports for data-driven decision-making.
+    
 3.) Inventory Management:
   - Tracking and management of product inventory.
   - Product details such as name, description, price, and stock quantity.
   - Categorization of products for better organization.
+    
 4.) Expense Management:
   - Daily expense recording.
   - Expense categorization.
   - Expense reporting for financial control.
   - Calculation of daily and monthly expenses.
+    
 5.) Data Visualization:
   - Graphical representation of sales data.
   - Dynamic charts and reports.
   - Visual insights into business performance.
   - Clear, concise data presentation.
+    
 6.) Annual and Quarterly Sales Data:
   - Compilation of annual and quarterly sales data.
   - Calculation of total sales, expenses, and profits.
   - Historical records for long-term performance analysis.
+    
 7.) User Privacy and Security:
   - User data protection and security measures.
+    
 8.) User-Friendly Interface:
   - Intuitive and easy-to-use interface.
   - User-friendly navigation for a seamless experience.
