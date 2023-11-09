@@ -49,6 +49,33 @@ The scope of SalesStat Pro encompasses a wide range of functionalities and featu
 
 The scope of SalesStat Pro is designed to cover various aspects of business operations, from sales analysis and inventory management to expense tracking and data visualization. It provides a comprehensive solution to support businesses in the fruit and vegetable industry and helps them make informed decisions and optimize their performance.
 
+**GOALS**
+  1. Simplify Inventory Management
+    - Streamline inventory management processes and eliminate manual record 
+      keeping.
+    - Reduced time spent on inventory management tasks, minimize errors in 
+      stock tracking.
+  2. Enhance Sales Analysis
+    - Enable businesses to gain deeper insights into their sales performance.
+    - Improved identification of top-performing products and actionable insights to 
+      boost sales.
+  3. Improved Profitability
+    - Empower businesses to make data-driven decisions to optimize profitability.
+    - Increased net profit margins, efficient expense management and revenue 
+      growth.
+  4. Enhance User-friendliness
+    - Ensure that the system is user-friendly and accessible to users of varying 
+      levels of technical expertise.
+  5. Facilitate Data-driven decision making
+    - Enable businesses to base their decisions on solid data and insights.
+    - High adoption of data-driven decision-making practices improved business 
+      outcomes.
+  6. Drive Business Efficiency
+    - Help businesses operate more efficiently by automating repetitive tasks and 
+      optimizing processes.
+    - Reduced operational costs, increased productivity and improved resource 
+      allocation
+
 **KEY FEATURES:**
 - **Digital Inventory Management:** Say goodbye to manual record-keeping. SalesStat 
 Pro allows you to digitize your entire inventory effortlessly. Each product is assigned 
@@ -65,7 +92,7 @@ identify your best-performing products, track their sales trends, and measure
 profitability. Make data-driven decisions about pricing, restocking, and product 
 offerings.
 
-**PRODUCT:**
+**PRODUCT VALUE:**
 SalesStat Pro is more than just a tool; it's your partner in business success. Whether you're 
 a small market vendor or a thriving wholesale distributor, our system adapts to your needs, 
 helping you streamline operations, maximize profits, and keep your fruit and vegetable 
