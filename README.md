@@ -49,6 +49,26 @@ The scope of SalesStat Pro encompasses a wide range of functionalities and featu
 
 The scope of SalesStat Pro is designed to cover various aspects of business operations, from sales analysis and inventory management to expense tracking and data visualization. It provides a comprehensive solution to support businesses in the fruit and vegetable industry and helps them make informed decisions and optimize their performance.
 
+**Key Features:**
+ Digital Inventory Management: Say goodbye to manual record-keeping. SalesStat 
+Pro allows you to digitize your entire inventory effortlessly. Each product is assigned 
+a unique Stock Keeping Unit (SKU), making it easy to organize, track, and manage 
+your stock.
+
+ Dynamic Profit and Loss Statements: Gain valuable insights into your business's 
+financial health with our dynamic profit and loss statements. Visualize your 
+earnings, expenses, and net profits month by month. Identify trends, spot 
+opportunities, and make informed decisions.
+
+ Product Sales Analysis: Dive deep into your sales data with SalesStat Pro. Easily 
+identify your best-performing products, track their sales trends, and measure 
+profitability. Make data-driven decisions about pricing, restocking, and product 
+offerings.
+
+ Customizable Reports: Tailor your reports to suit your specific needs. Choose 
+which metrics matter most to you and present them in a format that's easy to 
+understand.
+
 **Product Value:**
 SalesStat Pro is more than just a tool; it's your partner in business success. Whether you're 
 a small market vendor or a thriving wholesale distributor, our system adapts to your needs, 
