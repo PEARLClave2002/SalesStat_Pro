@@ -65,10 +65,6 @@ identify your best-performing products, track their sales trends, and measure
 profitability. Make data-driven decisions about pricing, restocking, and product 
 offerings.
 
-- **Customizable Reports:** Tailor your reports to suit your specific needs. Choose 
-which metrics matter most to you and present them in a format that's easy to 
-understand.
-
 **PRODUCT:**
 SalesStat Pro is more than just a tool; it's your partner in business success. Whether you're 
 a small market vendor or a thriving wholesale distributor, our system adapts to your needs, 
