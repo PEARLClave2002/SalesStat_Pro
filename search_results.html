@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+<style>
+    #earningsTable {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    #earningsTable th, #earningsTable td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    #earningsTable th {
+        background-color: #f2f2f2;
+    }
+
+    #earningsTable {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        border-radius: 10px; /* Add border-radius for rounded corners */
+        overflow: hidden; /* Hide overflow for rounded corners */
+    }
+
+    #earningsTable th, #earningsTable td {
+        border: 1px solid #ddd;
+        padding: 15px; /* Increase padding for better spacing */
+        text-align: left;
+    }
+
+    #earningsTable th {
+        background-color: #f2f2f2;
+    }
+</style>
+
+<div id="content">
+    <h5>Search Results</h5>
+
+    <table id="earningsTable">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Product</th>
+                <th>Earnings Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for earning in earnings %}
+                <tr>
+                    <td>{{ earning.earnings_date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                    <td>{{ earning.product_name }}</td>
+                    <td>{{ earning.earnings_amount }}</td>
+                </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+    <a href="{{ url_for('Earnings.Earnings') }}" class="btn btn-info">Return to Inventory</a>
+
+</div>
+<script>
+    function searchEarnings() {
+        // Get the selected date
+        const searchDate = document.getElementById('searchDate').value;
+
+        // Redirect to the search route with the selected date
+        window.location.href = `{{ url_for('Earnings.search_earnings') }}?date=${searchDate}`;
+    }
+</script>
+{% endblock %}

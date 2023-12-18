@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+
+{% block title %}Product Inventory{% endblock %}
+
+{% block content %}
+<style>
+    #addFormOverlay {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    #sidebar {
+      width: 200px;
+      height: 100vh;
+      background-color: #17a2b8;
+      color: #fff;
+      position: fixed;
+      top: 0;
+      left: 0;
+      overflow-x: hidden;
+      padding-top: 20px;
+  }
+
+  #sidebar ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+  }
+
+  #sidebar li {
+      padding: 15px;
+      text-decoration: none;
+      font-size: 16px;
+      color: #fff;
+      display: block;
+      transition: 0.3s;
+      cursor: pointer;
+  }
+
+  #sidebar li:hover {
+      background-color: #128293;
+  }
+
+    #content {
+        margin-left: 150px;
+        padding: 16px;
+    }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        max-width: 800px; /* Adjust as needed */
+        margin: auto;
+        border-radius: 10px; /* Set border-radius for curved edges */
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+        padding: 15px;
+        text-align: left;
+    }
+
+    thead {
+        background-color: #17a2b8; /* Set heading background color to info */
+        color: #fff;
+    }
+
+    tbody {
+        background-color: #f9f9f9; /* Set alternating row background color */
+    }
+
+    tbody tr:nth-child(odd) {
+        background-color: #e5e5e5;
+    }
+
+    .btn-info {
+        background-color: #17a2b8;
+        color: #fff;
+        border: none;
+    }
+    .bold-center {
+        font-weight: bold;
+        text-align: center;
+    }
+    .center-bottom {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        margin-top: 20px; /* Adjust as needed */
+    }
+</style>
+<div id="sidebar">
+    <ul>
+        <li><a class="nav-item nav-link" id="home" href="/" style="color:#f0f0f0;">
+            <img src="{{ url_for('static', filename='Asset/Home.png') }}" alt="Home Icon" style="width: 28px; height: 28px; float: left; margin-right: 8px;">Home</a></li>
+        <li><a href="{{ url_for('products.products') }}"class="btn btn-info"style="display: flex; align-items: center;">
+            <img src="{{ url_for('static', filename='Asset/Products.png') }}" alt="Product Icon" style="width: 32px; height: 32px; float: left; margin-right: 8px;">Products</a></li>
+        <li><a href="{{ url_for('inventory.inventory') }}"class="btn btn-info"style="display: flex; align-items: center;">
+            <img src="{{ url_for('static', filename='Asset/inventory-4.png') }}" alt="Inventory Icon" style="width: 32px; height: 32px; float: left; margin-right: 8px;">Inventory</a></li>
+        <li><a href="{{ url_for('Earnings.Earnings') }}"class="btn btn-info" style="display: flex; align-items: center;">
+            <img src="{{ url_for('static', filename='Asset/Earnings.png') }}" alt="Earnings Icon" style="width: 32px; height: 32px; float: left; margin-right: 8px;">Earnings</a></li>
+        <li><a href="{{ url_for('profile.Profile') }}"class="btn btn-info" style="display: flex; align-items: center;">
+            <img src="{{ url_for('static', filename='Asset/Profile.png') }}" alt="Profile Icon" style="width: 32px; height: 32px; float: left; margin-right: 8px;">Profile</a></li>
+        <li><a class="nav-item nav-link" id="logout" href="/logout" style="color:#f0f0f0;">
+            <img src="{{ url_for('static', filename='Asset/Logout.png') }}" alt="Logout Icon" style="width: 25px; height: 25px; float: left; margin-right: 8px;">Logout</a></li>
+    </ul>
+</div>
+
+<div class="container mt-3">
+    <h5 class="text-info bold-center">Product Inventory</h5>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Product Name</th>
+                <th>Quantity Sold</th>
+                <th>Quantity Available</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody id="inventoryTableBody">
+            <!-- Table data will be dynamically added here -->
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.product_name }}</td>
+                    <td>{{ product.quantitySold }}</td>
+                    <td>{{ product.quantityAvailable }}</td>
+                    <td><button class="btn btn-info" onclick="editProduct({{ product.id }})">Edit</button></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="center-bottom">
+        <a class="btn btn-info" href="{{ url_for('add_inventory.add_inventory') }}">Add</a>
+    </div>
+</div>
+</div>
+    <script>
+    
+        function editProduct(productId) {
+            window.location.href = "{{ url_for('inventory.edit_inventory', product_id=123) }}".replace('123', productId);
+        }
+    
+        function attachEditButtonClickEvent() {
+            var editButton = document.getElementById("editButton");
+            if (editButton) {
+                editButton.addEventListener("click", function () {
+                    var productId = '123';  // Replace with the actual product ID
+                    editProduct(productId);
+                });
+            }
+        }
+    
+        document.addEventListener("DOMContentLoaded", function () {
+            attachEditButtonClickEvent();
+        }); 
+    </script>    
+    {% endblock %}
+    

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style> 
+  .bold-heading {
+    color: #17a2b8;
+    font-weight: bold;
+    text-align: center; /* Center-align the text */
+  }
+</style>
+<div class="container my-5" style="background-image: url('{{ url_for('static', filename='Asset/bro.png') }}'); background-size: auto; background-position: center; background-repeat: no-repeat; padding: 50px;">
+  <h1 class="display-2 bold-heading" style="color: #17a2b8;">WELCOME to SalesStat Pro!</h1>
+  <!-- Replace #ff0000 with the desired color code -->
+  <p class="lead text-start">Don't rely on guesswork. Elevate your business with SalesStat Pro and make data-driven decisions that propel your fruit and vegetable business to new heights.</p>
+  <div class="row">
+    <div class="col text-center">
+
+<!-- Your HTML content including the button -->
+      <button class="btn btn-info btn-lg" onclick="window.location.href = '{{ url_for('products.products') }}'">Next</button>
+
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+

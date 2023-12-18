@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+
+{% block title %}Record Earnings{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    #content {
+        margin-left: 150px;
+        padding: 16px;
+    }
+
+    #top-links {
+        position: fixed;
+        top: 10px;
+        right: 20px;
+        display: flex;
+        flex-direction: row;
+    }
+
+    #top-links a {
+        margin-right: 10px;
+        padding: 10px 10px;
+        text-decoration: none;
+        color: #fff;
+        font-size: 16px;
+        transition: color 0.3s;
+    }
+
+    #top-links a:hover {
+        color: #f8f9fa; /* Change color on hover */
+    }
+
+    #recordEarningsFormContainer {
+        width: 50%;
+        margin: auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #recordEarningsForm label {
+        display: block;
+        margin-bottom: 8px;
+        color: #495057;
+        font-size: 16px;
+    }
+
+    #recordEarningsForm input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 16px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    #recordEarningsButton {
+        background-color: #17a2b8;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    #recordEarningsButton:hover {
+        background-color: #218838;
+    }
+
+    #returnButtonContainer {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    #returnButton {
+        background-color: #17a2b8;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    #returnButton:hover {
+        background-color: #0056b3;
+    }
+
+    #content h5 {
+        text-align: center;
+        color: #007bff;
+    }
+    .bold-center {
+        font-weight: bold;
+        text-align: center;
+    }
+    
+    .text-info {
+        color: #17a2b8; /* Set color to info color */
+    }
+</style>
+
+<div id="content">
+    <h5 class="bold-center text-info">Record Earnings</h5>
+
+    <div id="recordEarningsFormContainer">
+        <form id="recordEarningsForm" method="post" action="{{ url_for('earnings.record_earnings') }}">
+            <label for="product_name">Product Name:</label>
+            <input type="text" id="product_name" name="product_name" required>
+
+            <label for="earnings_amount">Earnings Amount:</label>
+            <input type="number" id="earnings_amount" name="earnings_amount" required>
+
+            <!-- You can add more fields as needed -->
+
+            <button type="submit" id="recordEarningsButton">Record Earnings</button>
+        </form>
+    </div>
+
+    <div id="returnButtonContainer">
+        <a href="{{ url_for('Earnings.Earnings') }}" id="returnButton">Return to Earnings</a>
+    </div>
+</div>
+<script>
+    function cancelAdd() {
+        document.getElementById('addEarningsForm').reset();
+        document.getElementById('successMessage').style.display = 'none';
+    }
+
+    function returnToInventory() {
+        window.location.href = "{{ url_for('Earnings.Earnings') }}";
+    }
+
+    document.getElementById('addEarningsForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        // Serialize the form data
+        var formData = new FormData(this);
+
+        // Use Fetch API to submit the form data
+        fetch("{{ url_for('earnings.record_earnings') }}", {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Display success message
+                document.getElementById('successMessage').innerText = data.message;
+                document.getElementById('successMessage').style.display = 'block';
+
+                // Reset the form after 3 seconds
+                setTimeout(function () {
+                    document.getElementById('addEarningsForm').reset();
+                    document.getElementById('successMessage').style.display = 'none';
+                }, 3000);
+            } else {
+                // Display error message
+                alert("Error adding Earnings: " + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+</script>
+
+{% endblock %}

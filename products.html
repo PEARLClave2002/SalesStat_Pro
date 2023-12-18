@@ -1,0 +1,318 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    #sidebar {
+      width: 200px;
+      height: 100vh;
+      background-color: #17a2b8;
+      color: #fff;
+      position: fixed;
+      top: 0;
+      left: 0;
+      overflow-x: hidden;
+      padding-top: 20px;
+  }
+
+  #sidebar ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+  }
+
+  #sidebar li {
+      padding: 15px;
+      text-decoration: none;
+      font-size: 16px;
+      color: #fff;
+      display: block;
+      transition: 0.3s;
+      cursor: pointer;
+  }
+
+  #sidebar li:hover {
+      background-color: #128293;
+  }
+
+    #content {
+        margin-left: 150px;
+        padding: 16px;
+    }
+    .product {
+        border: 2px solid #000000;;
+        padding: 10px;
+        margin: 10px;
+        text-align: center;
+        width: 150px;
+        box-sizing: border-box;
+        display: inline-block;
+    }
+    img {
+        max-width: 100px;
+        height: 100px;
+        border-radius: 5px;
+    }
+    .plus-icon {
+        cursor: pointer;
+        color: #3498db;
+        font-size: 24px;
+        margin-top: 10px;
+    }
+    .quantity-input {
+        display: none;
+        margin-top: 10px;
+    }
+
+    .save-button {
+        display: none;
+        margin-top: 10px;
+        cursor: pointer;
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+    
+    .vegetables-group {
+        margin-top: 20px; /* Adjust this value to set the desired distance */
+        margin-left: 20px;
+    }
+    .spices-group {
+        margin-top: 20px; /* Adjust this value to set the desired distance */
+        margin-left: 20px;
+    }
+    .fruits-group {
+        margin-top: 20px; /* Adjust this value to set the desired distance */
+        margin-left: 20px;
+    }
+    
+</style>
+    <div id="sidebar">
+        <ul>
+            <li><a class="nav-item nav-link" id="home" href="/"style="color:#f0f0f0;">
+                <img src="{{ url_for('static', filename='Asset/Home.png') }}" alt="Home Icon" style="width: 28px; height: 28px; float: left; margin-right: 8px;">Home</a></li>
+            <li><a href="{{ url_for('products.products') }}"class="btn btn-info"style="display: flex; align-items: center;">
+                <img src="{{ url_for('static', filename='Asset/Products.png') }}" alt="Product Icon" style="width: 32px; height: 32px; float: left; margin-right: 8px;">Products</a></li>
+            <li><a href="{{ url_for('inventory.inventory') }}"class="btn btn-info"style="display: flex; align-items: center;">
+                <img src="{{ url_for('static', filename='Asset/inventory-4.png') }}" alt="Inventory Icon" style="width: 32px; height: 32px; float: left; margin-right: 8px;">Inventory</a></li>
+            <li><a href="{{ url_for('Earnings.Earnings') }}"class="btn btn-info" style="display: flex; align-items: center;">
+                <img src="{{ url_for('static', filename='Asset/Earnings.png') }}" alt="Earnings Icon" style="width: 32px; height: 32px; float: left; margin-right: 8px;">Earnings</a></li>
+            <li><a href="{{ url_for('profile.Profile') }}"class="btn btn-info" style="display: flex; align-items: center;">
+                <img src="{{ url_for('static', filename='Asset/Profile.png') }}" alt="Profile Icon" style="width: 32px; height: 32px; float: left; margin-right: 8px;">Profile</a></li>
+            <li><a class="nav-item nav-link" id="logout" href="/logout"style="color:#f0f0f0;">
+                <img src="{{ url_for('static', filename='Asset/Logout.png') }}" alt="Logout Icon" style="width: 25px; height: 25px; float: left; margin-right: 8px;">Logout</a></li>
+        </ul>
+    </div>
+    <div id="product-dashboard">
+        <div class="vegetables-group">
+            <h5 style="color: #000000; font-weight: bold;">Vegetables</h5>
+            <div class="product" id="AMP1">
+                <img src="{{ url_for('static', filename='Asset/Ampalaya.jpg') }}" alt="Product 1">
+                <p>Ampalaya</p>
+                <div class="price" contenteditable="true">80.00</div>
+            </div>
+            <div class="product" id="CC2">
+                <img src="{{ url_for('static', filename='Asset/carrot.jpg') }}" alt="Product 2">
+                <p>Carrot</p>
+                <div class="price" contenteditable="true">180.00</div>
+            </div>
+            <div class="product" id="CCM3">
+                <img src="{{ url_for('static', filename='Asset/Cucumber.jpeg') }}" alt="Product 3">
+                <p>Cucumber</p>
+                <div class="price" contenteditable="true">40.00</div>
+            </div>
+            <div class="product" id="EG4">
+                <img src="{{ url_for('static', filename='Asset/Eggplant.jpg') }}"alt="Product 4">
+                <p>Eggplant</p>
+                <div class="price" contenteditable="true">45.00</div>
+            </div>
+            <div class="product" id="KMTT">
+                <img src="{{ url_for('static', filename='Asset/kamotetops.jpg') }}"alt="Product 5">
+                <p>Kamote Tops</p>
+                <div class="price" contenteditable="true">10.00</div>
+            </div>
+            <div class="product" id="KNGK">
+                <img src="{{ url_for('static', filename='Asset/kangkong.jpg') }}"alt="Product 6">
+                <p>KangKong</p>
+                <div class="price" contenteditable="true">10.00</div>
+            </div>
+            <div class="product" id="MNGGO">
+                <img src="{{ url_for('static', filename='Asset/Mongo.jfif') }}"alt="Product 7">
+                <p>Mongo</p>
+                <div class="price" contenteditable="true">100.00</div>
+            </div>
+            <div class="product" id="PCH">
+                <img src="{{ url_for('static', filename='Asset/pechay.jfif') }}"alt="Product 8">
+                <p>Pechay</p>
+                <div class="price" contenteditable="true">50.00</div>
+            </div>
+            <div class="product" id="PTT8">
+                <img src="{{ url_for('static', filename='Asset/potato.png') }}"alt="Product 9">
+                <p>Potato</p>
+                <div class="price" contenteditable="true">150.00</div>
+            </div>
+            <div class="product" id="OKR">
+                <img src="{{ url_for('static', filename='Asset/okra.jpg') }}"alt="Product 10">
+                <p>Okra</p>
+                <div class="price" contenteditable="true">70.00</div>
+            </div>
+            <div class="product" id="RPLY">
+                <img src="{{ url_for('static', filename='Asset/repolyo.jpg') }}"alt="Product 11">
+                <p>Repolyo</p>
+                <div class="price" contenteditable="true">35.00</div>
+            </div>
+            <div class="product" id="STBNS">
+                <img src="{{ url_for('static', filename='Asset/Sitaw.JPG') }}"alt="Product 12">
+                <p>String Beans</p>
+                <div class="price" contenteditable="true">50.00</div>
+            </div>
+            <div class="product" id="SQSH">
+                <img src="{{ url_for('static', filename='Asset/Squash.png') }}"alt="Product 13">
+                <p>Squash</p>
+                <div class="price" contenteditable="true">40.00</div>
+        </div>
+    </div>
+    <div class="spices-group">
+            <h5 style="color: #000000; font-weight: bold;">Spices</h5>
+            <div class="product" id="TMT">
+                <img src="{{ url_for('static', filename='Asset/tomato.jpg') }}"alt="Product 14">
+                <p>Tomato</p>
+                <div class="price" contenteditable="true">70.00</div>
+            </div>
+            <div class="product" id="BLPPR">
+                <img src="{{ url_for('static', filename='Asset/Bell Pepper.jpg') }}"alt="Product 15">
+                <p>Bell Pepper</p>
+                <div class="price" contenteditable="true">70.00</div>
+            </div>
+            <div class="product" id="CHL">
+                <img src="{{ url_for('static', filename='Asset/Chili.jpg') }}"alt="Product 16">
+                <p>Chili</p>
+                <div class="price" contenteditable="true">100.00</div>
+            </div>
+            <div class="product" id="ONN">
+                <img src="{{ url_for('static', filename='Asset/Onion.jfif') }}"alt="Product 17">
+                <p>Onion</p>
+                <div class="price" contenteditable="true">170.00</div>
+            </div>
+            <div class="product" id="GRLC">
+                <img src="{{ url_for('static', filename='Asset/Garlic.png') }}"alt="Product 18">
+                <p>Garlic</p>
+                <div class="price" contenteditable="true">160.00</div>
+            </div>
+            <div class="product" id="SPRNGO">
+                <img src="{{ url_for('static', filename='Asset/Spring Onions.jpg') }}"alt="Product 19">
+                <p>Spring Onions</p>
+                <div class="price" contenteditable="true">50.00</div>
+        </div>
+        </div>
+
+
+        <div class="fruits-group">
+            <h5 style="color: #000000; font-weight: bold;">Fruits</h5>
+            <div class="product" id="APL1">
+                <img src="{{ url_for('static', filename='Asset/apple.png') }}" alt="Product 20">
+                <p>Apple</p>
+                <div class="price" contenteditable="true">15.00</div>
+            </div>
+            <div class="product" id="BNN2">
+                <img src="{{ url_for('static', filename='Asset/banana.jpg') }}" alt="Product 21">
+                <p>Banana</p>
+                <div class="price" contenteditable="true">60.00</div>
+            </div>
+            <div class="product" id="DRN">
+                <img src="{{ url_for('static', filename='Asset/Durian.jpg') }}" alt="Product 22">
+                <p>Durian</p>
+                <div class="price" contenteditable="true">100.00</div>
+            </div>
+            <div class="product" id="GRP">
+                <img src="{{ url_for('static', filename='Asset/grapes.jpg') }}"alt="Product 23">
+                <p>Grapes</p>
+                <div class="price" contenteditable="true">250.00</div>
+            </div>
+            <div class="product" id="LNSN">
+                <img src="{{ url_for('static', filename='Asset/Lansones.jpg') }}"alt="Product 24">
+                <p>Lansones</p>
+                <div class="price" contenteditable="true">80.00</div>
+            </div>
+            <div class="product" id="MNG">
+                <img src="{{ url_for('static', filename='Asset/Mango.jpg') }}"alt="Product 25">
+                <p>Mango</p>
+                <div class="price" contenteditable="true">100.00</div>
+            </div>
+            <div class="product" id="MNGSTN">
+                <img src="{{ url_for('static', filename='Asset/mangosteen.jpg') }}"alt="Product 26">
+                <p>Mangosteen</p>
+                <div class="price" contenteditable="true">70.00</div>
+            </div>
+            <div class="product" id="ORNG">
+                <img src="{{ url_for('static', filename='Asset/orange.jpg') }}"alt="Product 27">
+                <p>Orange</p>
+                <div class="price" contenteditable="true">25.00</div>
+            </div>
+            <div class="product" id="PNPPL">
+                <img src="{{ url_for('static', filename='Asset/Pineapple.jpg') }}"alt="Product 28">
+                <p>Pineapple</p>
+                <div class="price" contenteditable="true">30.00</div>
+            </div>
+            <div class="product" id="RMBTN">
+                <img src="{{ url_for('static', filename='Asset/Rambutan.jpg') }}"alt="Product 29">
+                <p>Rambutan</p>
+                <div class="price" contenteditable="true">70.00</div>
+            </div>
+            <div class="product" id="WTRMLN">
+                <img src="{{ url_for('static', filename='Asset/watermelon.png') }}"alt="Product 30">
+                <p>Watermelon</p>
+                <div class="price" contenteditable="true">25.00</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        attachPriceEvents();
+    });
+
+    function attachPriceEvents() {
+        var priceDivs = document.querySelectorAll('.price');
+        priceDivs.forEach(function (priceDiv) {
+            priceDiv.addEventListener('input', function () {
+                var productId = this.parentNode.id;
+                var newPrice = this.innerText.trim();
+                // Send an HTTP request to update the database
+                updatePrice(productId, newPrice);
+            });
+        });
+    }
+
+    function updatePrice(productId, newPrice) {
+        fetch('/update_price', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                productId: productId,
+                newPrice: newPrice
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                console.log('Price updated successfully!');
+            } else {
+                console.error('Failed to update price:', data.message);
+            }
+        })
+        .catch(error => console.error('Error updating price:', error));
+    }
+</script>
+
+{% endblock %}

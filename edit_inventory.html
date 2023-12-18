@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Inventory{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    #sidebar {
+        width: 150px;
+        height: 100vh;
+        background-color: #17a2b8;
+        color: #fff;
+        position: fixed;
+        top: 0;
+        left: 0;
+        overflow-x: hidden;
+        padding-top: 20px;
+    }
+
+    #sidebar ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    #sidebar li {
+        padding: 15px;
+        text-decoration: none;
+        font-size: 16px;
+        color: #fff;
+        display: block;
+        transition: 0.3s;
+        cursor: pointer;
+    }
+
+    #sidebar li:hover {
+        background-color: #128293;
+    }
+
+    #content {
+        margin-left: 150px;
+        padding: 16px;
+    }
+
+    #top-links {
+        position: fixed;
+        top: 10px;
+        right: 20px;
+        display: flex;
+        flex-direction: row;
+    }
+
+    #top-links a {
+        margin-right: 10px;
+        padding: 10px 10px;
+        text-decoration: none;
+        color: #fff;
+        font-size: 16px;
+        transition: color 0.3s;
+    }
+
+    #top-links a:hover {
+        color: #f8f9fa; /* Change color on hover */
+    }
+    #content form {
+        max-width: 500px;
+        margin: auto;
+        padding: 20px;
+        background-color: #ffffff; /* Set your desired background color */
+        border: 1px solid #ddd; /* Add a border for a clean look */
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+    }
+
+    #content form label {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    #content form input {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+        border: 1px solid #ccc; /* Add a border for input fields */
+        border-radius: 5px;
+    }
+
+    #content form button {
+        background-color: #17a2b8;
+        color: #fff;
+        border: none;
+        padding: 15px; /* Set the desired height of the buttons */
+        cursor: pointer;
+        border-radius: 5px;
+        margin-bottom: 10px; /* Add margin between buttons */
+    }
+
+    #content form button:hover {
+        background-color: #218838;
+    }
+
+    #content form .btn-secondary {
+        background-color: #6c757d;
+        padding: 15px; /* Set the desired height of the buttons */
+        margin-right: 10px; /* Add margin between primary and secondary buttons */
+    }
+
+    #content form .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+    .bold-center {
+        font-weight: bold;
+        text-align: center;
+    }
+    
+    .text-info {
+        color: #17a2b8; /* Set color to info color */
+    }
+    .center-bottom-link {
+        display: block;
+        text-align: center;
+        margin-top: 20px; /* Adjust as needed for spacing */
+    }
+</style>
+
+<div id="content">
+    <h5 class="bold-center text-info">Edit Inventory</h5>
+    <form method="post" action="{{ url_for('inventory.edit_inventory', product_id=product.id) }}">
+        <label for="product_name">Product Name:</label>
+        <input type="text" id="product_name" name="product_name" value="{{ product.product_name }}" required>
+
+        <label for="quantity_sold">Quantity Sold:</label>
+        <input type="number" id="quantity_sold" name="quantity_sold" value="{{ product.quantitySold }}" required>
+
+        <label for="quantity_available">Quantity Available:</label>
+        <input type="number" id="quantity_available" name="quantity_available" value="{{ product.quantityAvailable }}" required>
+
+        <button type="submit" class="btn btn-info">Update Inventory</button>
+    </form>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div id="successMessage" class="alert alert-success" role="alert">
+                {{ messages[0][1] }}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <a href="{{ url_for('add_inventory.add_inventory') }}" class="btn btn-info center-bottom-link">Return to Add Inventory</a>
+</div>
+<script>
+    function cancelEdit() {
+        window.location.href = "{{ url_for('add_inventory.add_inventory') }}";
+    }
+</script>
+
+{% endblock %}

@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+
+{% block title %}Account Profile{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    #sidebar {
+      width: 200px;
+      height: 100vh;
+      background-color: #17a2b8;
+      color: #fff;
+      position: fixed;
+      top: 0;
+      left: 0;
+      overflow-x: hidden;
+      padding-top: 20px;
+  }
+
+  #sidebar ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+  }
+
+  #sidebar li {
+      padding: 15px;
+      text-decoration: none;
+      font-size: 16px;
+      color: #fff;
+      display: block;
+      transition: 0.3s;
+      cursor: pointer;
+  }
+
+  #sidebar li:hover {
+      background-color: #128293;
+  }
+
+    #content {
+        margin-left: 150px;
+        padding: 16px;
+    }
+    .profile-container {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .profile-container h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .profile-section {
+        margin-bottom: 30px;
+    }
+
+    .profile-section h2 {
+        font-size: 20px;
+        border-bottom: 2px solid #17a2b8;
+        padding-bottom: 5px;
+        margin-bottom: 10px;
+    }
+
+    .profile-info {
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+
+    .profile-actions {
+        margin-top: 20px;
+    }
+
+    .profile-actions a {
+        text-decoration: none;
+        color: #17a2b8;
+        margin-right: 20px;
+    }
+    .profile-picture img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%; /* Add a border-radius for a circular shape */
+    }
+    .avatar-list {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .avatar {
+        width: 80px; /* Adjust the width as needed */
+        height: 80px; /* Adjust the height as needed */
+        margin: 10px;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: border-color 0.3s;
+    }
+
+    .avatar:hover {
+        border-color: #17a2b8;
+    }
+    
+</style>
+<div id="sidebar">
+    <ul>
+        <li><a class="nav-item nav-link" id="home" href="/" style="color:#f0f0f0;">
+            <img src="{{ url_for('static', filename='Asset/Home.png') }}" alt="Home Icon" style="width: 28px; height: 28px; float: left; margin-right: 8px;">Home</a></li>
+        <li><a href="{{ url_for('products.products') }}"class="btn btn-info"style="display: flex; align-items: center;">
+            <img src="{{ url_for('static', filename='Asset/Products.png') }}" alt="Product Icon" style="width: 32px; height: 32px; float: left; margin-right: 8px;">Products</a></li>
+        <li><a href="{{ url_for('inventory.inventory') }}"class="btn btn-info"style="display: flex; align-items: center;">
+            <img src="{{ url_for('static', filename='Asset/inventory-4.png') }}" alt="Inventory Icon" style="width: 32px; height: 32px; float: left; margin-right: 8px;">Inventory</a></li>
+        <li><a href="{{ url_for('Earnings.Earnings') }}"class="btn btn-info" style="display: flex; align-items: center;">
+            <img src="{{ url_for('static', filename='Asset/Earnings.png') }}" alt="Earnings Icon" style="width: 32px; height: 32px; float: left; margin-right: 8px;">Earnings</a></li>
+        <li><a href="{{ url_for('profile.Profile') }}"class="btn btn-info" style="display: flex; align-items: center;">
+            <img src="{{ url_for('static', filename='Asset/Profile.png') }}" alt="Profile Icon" style="width: 32px; height: 32px; float: left; margin-right: 8px;">Profile</a></li>
+        <li><a class="nav-item nav-link" id="logout" href="/logout" style="color:#f0f0f0;">
+            <img src="{{ url_for('static', filename='Asset/Logout.png') }}" alt="Logout Icon" style="width: 25px; height: 25px; float: left; margin-right: 8px;">Logout</a></li>
+    </ul>
+</div>
+<div id="content" class="profile-container">
+    <h1 style="color: #17a2b8;"><strong>Your Account Profile</strong></h1>
+
+    <div class="profile-picture">
+        <img src="{{ url_for('static', filename='Asset/Profile.png') }}" alt="Profile Picture">
+
+    <div class="profile-section">
+        <h2>Account Information</h2>
+        <p class="profile-info"><strong>Email:</strong> {{ user.email }}</p>
+        <p class="profile-info"><strong>Username:</strong> {{ user.first_name }}</p>
+    </div>
+
+    <div class="profile-section">
+        <h2>Profile Settings</h2>
+        <p class="profile-info"><strong>Privacy Settings:</strong> Public</p>
+        <p class="profile-info"><strong>Notification Preferences:</strong> Email and In-App</p>
+    </div>
+
+    <div class="profile-section">
+        <h2>Security</h2>
+        <p class="profile-info"><strong>Password:</strong> ************</p>
+        <p class="profile-info"><a href="{{ url_for('password.change_password') }}">Change Password</a></p>
+    </div>
+
+    <div class="profile-section">
+        <h2>Subscription</h2>
+        <p class="profile-info"><strong>Plan:</strong> Premium</p>
+        <p class="profile-info"><strong>Next Billing Date:</strong> February 1, 2023</p>
+        <p class="profile-info"><a href="#">Upgrade Plan</a></p>
+    </div>
+</div>
+{% endblock %}

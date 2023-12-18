@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+
+{% block title %}Earnings{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    #sidebar {
+      width: 200px;
+      height: 100vh;
+      background-color: #17a2b8;
+      color: #fff;
+      position: fixed;
+      top: 0;
+      left: 0;
+      overflow-x: hidden;
+      padding-top: 20px;
+  }
+
+  #sidebar ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+  }
+
+  #sidebar li {
+      padding: 15px;
+      text-decoration: none;
+      font-size: 16px;
+      color: #fff;
+      display: block;
+      transition: 0.3s;
+      cursor: pointer;
+  }
+
+  #sidebar li:hover {
+      background-color: #128293;
+  }
+
+    #content {
+        margin-left: 150px;
+        padding: 16px;
+    }
+    /* Add your custom styles for the earnings page here */
+    #content {
+        margin-left: 150px;
+        padding: 16px;
+    }
+
+    #earningsTable {
+        width: 80%; /* Adjust the width as needed */
+        margin: auto; /* Center the table */
+        border-collapse: collapse;
+        margin-top: 20px;
+        border-radius: 10px; /* Add border-radius for rounded corners */
+        overflow: hidden; /* Hide overflow for rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box-shadow for a subtle effect */
+    }
+
+    #earningsTable th, #earningsTable td {
+        border: 1px solid #ddd;
+        padding: 15px; /* Increase padding for better spacing */
+        text-align: left;
+    }
+
+    #earningsTable th {
+        background-color: #17a2b8; /* Set heading background color to info */
+        color: #fff; /* Set heading text color to contrast */
+    }
+    #searchForm {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        max-width: 400px; /* Set the maximum width of the search form */
+        border-radius: 5px; /* Add border-radius for smooth edges */
+        overflow: hidden; /* Hide overflowing content */
+        margin: auto; /* Center the search form */
+    }
+
+    #searchProductName {
+        padding: 10px;
+        font-size: 16px;
+        margin-right: 10px;
+        width: 80%; /* Set the width of the product name input */
+        border: none; /* Remove input border */
+        border-radius: 5px; /* Add border-radius for smooth edges */
+    }
+
+    #searchButton {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px; /* Adjust padding for better alignment */
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    #searchButton:hover {
+        background-color: #0056b3;
+    }
+
+    #recordEarningsButton {
+        background-color: #17a2b8;
+        color: #fff;
+        border: none;
+        padding: 10px 15px; /* Adjust padding for better alignment */
+        cursor: pointer;
+        border-radius: 5px;
+        margin-top: 10px;
+        display: block; /* Center the button */
+        margin: auto;
+    }
+
+    #recordEarningsButton:hover {
+        background-color: #218838;
+    }
+    .bold-center {
+        font-weight: bold;
+        text-align: center;
+    }
+    
+    .text-info {
+        color: #17a2b8; /* Set color to info color */
+    }
+    
+</style>
+
+<div id="sidebar">
+    <ul>
+        <li><a class="nav-item nav-link" id="home" href="/" style="color:#f0f0f0;">
+            <img src="{{ url_for('static', filename='Asset/Home.png') }}" alt="Home Icon" style="width: 28px; height: 28px; float: left; margin-right: 8px;">Home</a></li>
+        <li><a href="{{ url_for('products.products') }}"class="btn btn-info"style="display: flex; align-items: center;">
+            <img src="{{ url_for('static', filename='Asset/Products.png') }}" alt="Product Icon" style="width: 32px; height: 32px; float: left; margin-right: 8px;">Products</a></li>
+        <li><a href="{{ url_for('inventory.inventory') }}"class="btn btn-info"style="display: flex; align-items: center;">
+            <img src="{{ url_for('static', filename='Asset/inventory-4.png') }}" alt="Inventory Icon" style="width: 32px; height: 32px; float: left; margin-right: 8px;">Inventory</a></li>
+        <li><a href="{{ url_for('Earnings.Earnings') }}"class="btn btn-info" style="display: flex; align-items: center;">
+            <img src="{{ url_for('static', filename='Asset/Earnings.png') }}" alt="Earnings Icon" style="width: 32px; height: 32px; float: left; margin-right: 8px;">Earnings</a></li>
+        <li><a href="{{ url_for('profile.Profile') }}"class="btn btn-info" style="display: flex; align-items: center;">
+            <img src="{{ url_for('static', filename='Asset/Profile.png') }}" alt="Profile Icon" style="width: 32px; height: 32px; float: left; margin-right: 8px;">Profile</a></li>
+        <li><a class="nav-item nav-link" id="logout" href="/logout"style="color:#f0f0f0;">
+            <img src="{{ url_for('static', filename='Asset/Logout.png') }}" alt="Logout Icon" style="width: 25px; height: 25px; float: left; margin-right: 8px;">Logout</a></li>
+    </ul>
+</div>
+
+<div id="content">
+    <h5 class="bold-center text-info">Earnings</h5>
+    <form id="searchForm" method="get" action="{{ url_for('Earnings.search_earnings') }}">
+        <input type="text" id="searchProductName" name="product_name" placeholder="Product Name">
+        <button type="submit" id="searchButton">Search</button>
+    </form>
+    
+    
+    <!-- Add a button to record new earnings -->
+    <button id="recordEarningsButton" onclick="recordEarnings()">Record Earnings</button>
+    <!-- Add a table to display earnings -->
+    <table id="earningsTable">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Product</th>
+                <th>Earnings Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for earning in earnings %}
+                <tr>
+                    <td>{{ earning.earnings_date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                    <td>{{ earning.product_name }}</td>
+                    <td>{{ earning.earnings_amount }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+<script>
+    function recordEarnings() {
+        // Redirect to the page where you can add new earnings
+        window.location.href = "{{ url_for('earnings.record_earnings') }}";
+    }
+</script>
+{% endblock %}
+
